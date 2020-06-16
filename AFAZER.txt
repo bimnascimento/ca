@@ -1,0 +1,167 @@
+
+
+
+- preparar conteudo spring
+
+
+
+
+
+
+- corrigir bugs
+- Serpara hora para corrida 
+- verificar agendamento dente
+- orcamento lipo
+- criar site doacao - dominio gobbady
+- slide treinamento - bruno ana
+- testes treinamento - bruno ana
+- marcar sair fds - sexta ou sabado
+- vender esteira e maquina abdominal
+- vender moto
+- vender carro - orcamento
+- parceria loja doces - bolo no pote
+- estudar / aprender ingles (cassia)
+- estudar padrao projeto
+- subir orijeto (lavanderia - diogo)
+- para f1 - so acompanhado
+- tentar mudar para blumenal
+- criar site de guia da cidade
+- dormir 8 horas correto
+- criar ambiente log para fnext
+- fazer bkp nuvem (varias conta )
+- comprar maq e vender maquina fisica
+
+
+
+
+
+
+- consulta medica - 09/01 20:20
+- consulta dentista - 13/01 - 17:00
+- comprar moto
+- investir
+- atualizar linkedin
+- compra roupa
+- republicar pointlave
+- compra tablet
+- criar app padrao
+- trocar cel
+- pagar ipva
+- pagar multa
+- cadastrar positivo
+- malhar
+- fazer ingles particular
+- resolver pintura
+- ver apartamento
+- faxina
+
+
+CSNA3
+--
+Setor Imobiliário (EZTC3)
+Utilidade Pública (EGIE3)
+Material de construção (DTEX3, PTBL3)
+Concessões Rodoviárias (CCRO3, ECOR3)
+Magazine Luiza (MGLU3)
+
+
+WEGE3
+ITUB3
+B3SA3
+
+XPLG11 - logistica
+2 - XPML11 - shopping / HGBS11
+3 - KNRI11 - fundo corporativo - 20 galpao
+4 - GGR
+BRCR11 - lojas corporativas
+1 - BCFF11 - fundos d fundos - ok 20 fundos
+
+- maior liquidez
+
+VRTA11
+XPML11
+HGRE11 - lojas corporativas
+
+fundos - di - taxa zero
+
+P/VPA
+
+HGLG11 1200 
+XPLG11
+VTLT11 1200
+MALL11 1200
+XPML11 1,368 1200
+KNRI11 1200
+BTCR11 1,044 1000
+BRCR11 1,066 1000
+
+
+
+shopping
+XPML11 1.38 143.01 0.52 4.95
+VISC11 1.13 139.25 0.77 5.70 -
+MALL11 1.20 126.49 0.36 5.26 -
+
+lajes
+HGRE11 1.24 163.83 1.08 4.54
+GTWR11 1.24 122.25 0.69 6.57
+BRCR11 1.08 119.30 0.56 13,27 -
+BTCR11 1.04 101.15 0.56 7.41 -
+FIIP11B 1.03 201.04 1.22 7.63 -
+TGAR11 1.05 140.25 1.35 7.78 -
+RBRD11 1.34 107.50 1.14 8.66
+KNRI11 1.20 181.52 0.74 4.89
+
+
+logistica
+VTLT11 1.22 123.50 0.69 6.72
+GGRC11 1.24 147.50 0.66 5.22
+
+
+EGIE3
+WEGE3
+ITSA4
+
+
+
+BTCR11 102
+BRCR11 116.
+HCRI11
+FIIP11B
+TGAR11
+VISC11
+
+
+IRBR3F - 99 * 32,40 = 3.207
+
+
+
+
+
+
+DE MANHA
+1 - TERMOGENICO
+1 - TRIBULUS
+1 - MULTI VITAMINICO
+1/2 - dose CREATINA
+1/2 - dose WHEY
+2 - OVOS
+
+frutas ...
+agua e sal ...
+
+1:30 HORA ANTES TREINO
+1 - dose MCT
+1 - dose BCAA
+1 - dose CLA + CARNITINA
+1 - TERMOGENICO
+
+TREINO - 60 min corrida
+
+APOS TREINO
+1 - dose WHEY
+1/2 - dose BCAA
+
+JANTA 
+1/2 - dose CREATINA
+1 - TRIBULUS

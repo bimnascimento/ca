@@ -1,0 +1,1162 @@
+
+
+
+# --- Variavel
+@FRONT = http://localhost:4200/next-proposal-evaluation/v1
+@PROPOSAL = http://localhost:8090/next-proposal-evaluation/v1
+@PROPOSAL_DEV = http://192.168.246.240:7070/DEV-3/next-proposal-evaluation/v1
+@PROPOSAL_PRESITE = http://192.168.246.240:7070/PB-745/next-proposal-evaluation/v1
+@SADIF = http://localhost:8099/sadif-engine-mock
+@DERIVATION = http://localhost:8091/next-derivation-engine/v1
+@DERIVATION_DEV = http://192.168.246.240:7070/DEV-3/next-derivation-engine/v1
+@DERIVATION_PRESITE = http://192.168.246.240:7070/PB-745/next-derivation-engine/v1
+@CA = http://192.168.246.229:8080/v1
+
+# @contentType = application/json-patch+json
+@contentType = application/json;charset=UTF-8
+@createdAt = {{$datetime iso8601}}
+@tokenOld = eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwNTM4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIjEwLjEzMC4yNC4xNDIiLA0KICAgICAic291cmNlIjogIjE5Mi4xNjguNjAuNjQ6NTMwNjQiLA0KICAgICAiZnByaW50IjogIiIsICAgICANCiAgICAgImFnZW50SWQiOiAiSTkwNTM4NyIsDQogICAgICJ0aWNrZXQiOiAiQTJEMUYwRkUyRUI1QTYyMSIsDQogICAgICJzZXNzaW9uSWQiOiAiMDAxRDYzNUU5RDM1MkI0WDAyQzk5OTFGQkRBRTFGQjUiLA0KICAgICAiY3JlZGVudGlhbHMiOiAiTlRFMU1EQXhOa00xUVRFM1FrUkNRakl3TmpOR05EVXpPVUV6UlRReVJqZzRPVE00TlVFNFFUTTBRVGcyUVRBM01qWXhRekE0TmpGQk1VVTFOakkxTVRoQ1F6azBPRUlnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnUmpGRk1qVTIiLA0KICAgICAiY2xhaW1zIjogeyJzdGFmZiI6dHJ1ZSwiYXV0aG9yaXRpZXMiOiJDQVNJMDAwNyxGQ09EMDAwMSxGQ09EMDAwMixORVhUMDAyMSxQRkdTRUcwMiJ9IA0KICB9LA0KICAianRpIjoiQTJEMUYwRkUyRUI1QTYyMSIsDQogICJpc3MiOiJpbnRlcm5hbCIsDQogICJpYXQiOiIxNTg1MjYzODQ1IiwgIA0KICAiZXhwIjoiMTU4NTI5MjY0NSINCn0.EQYd3fduPg_cKTZPf7VYw0NWUvycGsfLpQFil6_eJhw
+@token = {{login.response.body.token}}
+@coreipDev = 10.194.66.246:7070/DEV-3
+@coreipPreSite = 10.194.66.246:7070/PB-745
+
+
+
+###
+# @name login
+POST http://192.168.246.229:8080/v1/login/internal HTTP/1.1
+# POST http://192.168.246.240:7070/DEV-3/login/internal HTTP/1.1
+# POST http://localhost:8060/v1/login/internal HTTP/1.1
+Content-Type: {{contentType}}
+
+{"agentId":"I904387","host":"unknown","password":"testejun"}
+
+
+
+
+###
+# @name login_APP
+# POST http://192.168.246.229:8080/v1/login/internal HTTP/1.1
+# POST http://192.168.246.240:7070/DEV-3/login/internal HTTP/1.1
+# POST http://localhost:8060/v1/login/internal HTTP/1.1
+POST http://localhost:8060/v2/login HTTP/1.1
+# POST http://192.168.246.229:8080/v2/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "cpf":"37909198884",
+  "password":"51501280ADA9B1A239CDEAC0B6545B255D3436248B3E0B5840FD696901FD3B1658D4E938F0F3A2EBEE38C2C26130EEDEEFF32DEBA2456F31A1DA3CD203EE64F87D10531B6F33A4E0EA4996B5CCAB0C6740BCCE3DC8490E0DE4A0B94FA9DB778AA66BE1818299E660B1ECFED40521127EE332D97AD54A4D7BB9F7C82ABBAEE0610E6B803AD8DC53A9DFF332F8DF882BA0510BBA6053D82",
+  "riskScore":"1",
+  "device": { 
+    "deviceId": "48224"
+  }
+}
+
+
+
+###
+curl "http://192.168.246.229:8080/v1/login/internal" -H "Content-type: application/json;charset=UTF-8" --data-binary '{"agentId":"I902887","host":"unknown","password":"testemar"}'
+
+
+
+###
+# REFERENCE INFO
+# GET http://localhost:8000/v1/referenceInfo HTTP/1.1
+GET http://192.168.246.229:8080/v1/referenceInfo HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreipDev}}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL TEST - PROPOSAL
+# --------------------------------------------------------------------------
+# @name proposal_test
+@teste = 2
+GET {{PROPOSAL}}/local?teste={{teste}} HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+
+
+
+
+
+
+
+
+### --------------------------------------------------------------------------
+# PLATFORM TEST
+# --------------------------------------------------------------------------
+# @name platform_test
+GET http://localhost:8060/v1/local?teste=1 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL HOST-USER
+# --------------------------------------------------------------------------
+# @name proposal_host_user
+GET {{PROPOSAL}}/profile/host-user HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+###
+# PUT http://localhost:8000/v1/contingency/activate?Enable=true HTTP/1.1
+# GET http://localhost:8000/v1/contingency/activate HTTP/1.1
+PUT http://192.168.246.229:8080/v1/contingency/activate?Enable=true HTTP/1.1
+# PUT http://192.168.246.240:7070/DEV-3/next-security-engine/v1/contingency/activate?Enable=false HTTP/1.1
+# PUT http://localhost:8000/v1/matrix-parameter/timeoutSadif HTTP/1.1
+# GET http://192.168.246.229:8080/v1/matrix-parameter/activate/1/false HTTP/1.1
+# GET http://192.168.246.240:7070/DEV-3/next-security-engine/v1/matrix-parameter/activate?id=10&enable=true HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreipPreSite}}
+
+
+
+
+###
+GET http://192.168.246.229:8080/v1/matrix-parameter/matrixScore/1 HTTP/1.1
+# GET http://192.168.246.240:7070/DEV-3/next-security-engine/v1/matrix-parameter/scores HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: 10.194.66.246:7070/DEV-3
+
+
+
+
+###
+GET http://192.168.245.212:8080/v1/sadif/fnext/verificacao?id=1 HTTP/1.1
+Content-Type: {{contentType}}
+access-token: ZaofRC7XjPb3
+
+
+
+### --------------------------------------------------------------------------
+# resumeN3
+# --------------------------------------------------------------------------
+# @name resumeN3
+POST {{DERIVATION}}/workflow/proposalDecision HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+    "decisionStage": "DERIVED_N2_ENGINE",
+    "prospectProposal": {
+        "customer": {
+            "customerUid": 37531
+        },
+        "proposalUid": 20200518094926023,
+        "prospectProposalUid": 1384,
+        "sequenceProposalUid": 1
+    },
+    "timestamp": "2020-04-01 00:00:00",
+    "userId": "0"
+}
+
+
+
+###
+# GET http://localhost:8090/next-proposal-evaluation/v1/proposal-domain/documentType HTTP/1.1
+# GET http://192.168.246.229:8080/v1/proposal-domain/documentType HTTP/1.1
+# GET http://localhost:8080/v1/proposal-domain/documentType HTTP/1.1
+POST http://localhost:8080/v1/engine-data/generalSearch HTTP/1.1
+# POST http://localhost:8091/next-derivation-engine/v1/engine-data/generalSearch HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+{"prospectProposalList":[{"customer":{"customerUid":36492},"prospectProposalUid":679,"proposalUid":20200324143922765,"sequenceProposalUid":2}]}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL CREATE JSON
+# --------------------------------------------------------------------------
+# @name proposal_create_json
+POST {{PROPOSAL}}/proposal/receive HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{"customer":{"customerUid":36222},"prospectRegistrationData":{"detailRegistrationData":{"unknownFather":false,"unknownMother":false,"birthdate":"1995-03-08","birthPlace":"","cityOfBirth":9465,"countryOfBirth":46,"email":"GFERREIRACUNHA@GMAIL.COM","fatherName":null,"gender":"M","motherName":"FULANA DA SILVA","stateOfBirth":11,"maritalStatus":1,"professionCategoryId":null,"professionId":null,"spouseName":null,"cpf":"68348866728","emissionDate":null,"numDoc":"1425626262","registrationName":"GABRIEL FERREIRA CUNHA","civilCapacityCode":null,"documentType":{"docTypeUid":3,"documentTypeName":null,"gccCdTipoDocIcor":null},"documentIssueDate":null,"documentIssuerDepartment":"","documentIssuerStateId":null,"universityStudentInd":"Y","documentCity":null,"monthlyIncome":1000000,"politicallyExposedPersonRelationship":false,"pepRoleResponse":"N","pepRelatedResponse":"N","listPhoneNumber":[{"phoneType":"MOBILE","primaryPhone":true,"countryCode":"55","areaCode":"63","phoneNumber":956656396}],"referencePersonTypeId":1,"referencePersonName":"NEXT","referencePersonCountryCode":null,"referencePersonAreaCode":null,"referencePersonPhoneNr":1111111111,"pepRoleId":null,"pepRelatedId":null,"pepRelatedCpf":null,"educationLevelId":null,"eduInstitutionName":"NEXT","eduMajor":"N","eduInstitutionStateCd":"SC","eduCompletionDt":"2020-02-28","eduCurrentSemester":null,"eduLastUpdatedDt":"2020-02-28","invoiceDay":null,"nickname":null,"twitterAccount":null,"gpsPermissionInd":true,"pinPointChangedInd":false,"pinPointLatitude":null,"pinPointLongitude":null,"universityStudentChangedInd":null},"listAddressProspectProposal":[{"addressType":"RESIDENTIAL","detailAddressProspect":{"addressAdditionalInfo":null,"mailingAddressInd":"Y","neighbourhood":"JARDIM AURENY I","stateCode":"TO","streetName":"R RORAIMA","streetNumber":"S/N","cityId":0,"postalCode":77060118}}]},"internalRevenueProspect":{"detailProspectRevenue":{"revenueAgencyBirthDt":"2020-03-10","revenueAgencyCode":"00","revenueAgencyCustomerName":"FULANO BELTRANO DA SILVA","revenueAgencyDescription":"ATIVA","revenueAgencyGender":"M","revenueAgencyIsPEP":"N","revenueAgencyMotherName":"FULANA DA SILVA","revenueAgencyStatusId":null}},"listDocumentRequestProposal":[{"documentType":{"docTypeUid":3,"documentTypeName":"CNH","gccCdTipoDocIcor":null},"resendDocUid":null,"typeAprovalDocumentId":1,"detailDocumentProposal":{"documentId":786128,"journey":"Ades�o","documentName":"83980793400120200228195655420000Z.JPEG","uploadDate":"2020-02-28T19:56:55.42","mimeType":"IMAGE/JPEG","observation":null,"checkVideoSelfie":null}},{"documentType":{"docTypeUid":5,"documentTypeName":"Video","gccCdTipoDocIcor":null},"resendDocUid":null,"typeAprovalDocumentId":1,"detailDocumentProposal":{"documentId":786119,"journey":"Ades�o","documentName":"9193980793400120200228195222818000Z.MP4","uploadDate":"2020-02-28T19:52:22.818","mimeType":"VIDEO/MP4","observation":null,"checkVideoSelfie":1}},{"documentType":{"docTypeUid":6,"documentTypeName":"FRAME","gccCdTipoDocIcor":null},"resendDocUid":null,"typeAprovalDocumentId":null,"detailDocumentProposal":{"documentId":786118,"journey":"Ades�o","documentName":"9203980793400120200228195222306000Z.JPEG","uploadDate":"2020-02-28T19:52:22.306","mimeType":"IMAGE/JPEG","observation":null,"checkVideoSelfie":null}}],"additionalProspectInformation":{"detailAdditionalDataProspect":{"device":{"deviceId":null,"countryCode":null,"areaCode":null,"phone":null,"imei":null,"carrier":null,"countryIsoCd":null,"browserSupplier":null,"browserUserAgent":null,"chipIccid":null,"tokenDevice":null,"os":null,"osVersion":null,"osStatusId":null,"maker":null,"model":null,"serialNumber":null,"mac":null},"listCustomerFatca":[],"listCustomerAsset":[],"listRestrictions":[]}},"prospectTempest":{"detailProspectTempest":{"tempestAddressCheckedInd":"false","tempestHeuristicDate":"2020-02-28T19:53:11.063","tempestDisableInd":null,"tempestDisableDate":null,"firstTempestCallDate":"2020-02-28T19:53:11.063","stateFailed":"Y","tempestData":null}},"timestamp":"2020-03-10T20:08:34.695"}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# DOCUMENT ATT
+# --------------------------------------------------------------------------
+# @name document_att
+POST http://192.168.246.240:7070/DEV-3/docService/documents HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+< ./demo.xml
+
+
+###
+curl 
+  -i 
+  -H "Application/json" 
+  -H "Content-type: application/json" 
+  -H "Content-type: application/json" 
+  -H "X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwNTQ4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIjEyNy4wLjAuMSIsDQogICAgICJzb3VyY2UiOiAiMTkyLjE2OC42MC42NDo1ODY2MSIsDQogICAgICJmcHJpbnQiOiAiIiwgICAgIA0KICAgICAiYWdlbnRJZCI6ICJJOTA1NDg3IiwNCiAgICAgInRpY2tldCI6ICJERTM3MkFEMkEwOURFNjFCIiwNCiAgICAgInNlc3Npb25JZCI6ICIwMDFENjM1RTlEMUM4QzJYMDJDOTNFMjgwNTFCQzMyMCIsDQogICAgICJjcmVkZW50aWFscyI6ICJOVEUxTURBeE5qZzRORGc1UkRjeU16WTNOVVF5TlVORk5UQXlRa0l3UlRaRVJEbEdORVZHUWpNNU5EWTBSREl6T1RNMVFrUXlNVFF5TkRFeE5EUTVSRGxCTmpNNFJqRWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdPVFU1UlRreiIsDQogICAgICJjbGFpbXMiOiB7InN0YWZmIjp0cnVlLCJhdXRob3JpdGllcyI6IkNBU0kwMDA3LEZDT0QwMDAxLEZDT0QwMDAyLE5FWFQwMDIyLFBGR1NFRzAyIn0gDQogIH0sDQogICJqdGkiOiJERTM3MkFEMkEwOURFNjFCIiwNCiAgImlzcyI6ImludGVybmFsIiwNCiAgImlhdCI6IjE1ODQzNzA0NzQiLCAgDQogICJleHAiOiIxNTg0Mzk5Mjc0Ig0KfQ.4fDyxeNCSkOCO9a8R7NaD3G9sDlWhZN7LLcSMm9XonQ" 
+  -H "coreip: 10.194.66.246:7070/DEV-3" 
+  -F files=@"C://DOWNLOAD//NEXT//86755730300820200103085655076000Z.JPEG" 
+  "http://192.168.246.240:7070/DEV-3/docService/documents"
+
+
+POST {{PROPOSAL}}/proposal/proposal/attachmentDocuments HTTP/1.1
+Host: localhost:4202
+Connection: keep-alive
+Content-Length: 1179683
+Pragma: no-cache
+Cache-Control: no-cache
+DNT: 1
+X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMzE4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIjEyNy4wLjAuMSIsDQogICAgICJzb3VyY2UiOiAiMTkyLjE2OC42MC42NDo2MTM4NiIsDQogICAgICJmcHJpbnQiOiAiIiwgICAgIA0KICAgICAiYWdlbnRJZCI6ICJJOTAzMTg3IiwNCiAgICAgInRpY2tldCI6ICJFNjYyRTQ5RTFFMDJCRjAyIiwNCiAgICAgInNlc3Npb25JZCI6ICIwMDFENjM1RTlEMUYzNDlYMDJDOTQ3NDM5NjA1OTNDNiIsDQogICAgICJjcmVkZW50aWFscyI6ICJOVEUxTURBeE5qSkZRemd5TkRSQk5rUXhSVGt4UTBKR01VVTFOVGd6TlRORVFqRkRPREZCUWpoR09USXhRVFkxUVVRMVF6VXdNRVE0TURkRU0wSTNOams0TUVRelFUY2dJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdOemxCTUVJeSIsDQogICAgICJjbGFpbXMiOiB7InN0YWZmIjp0cnVlLCJhdXRob3JpdGllcyI6IkNBU0kwMDA3LEZDT0QwMDAxLEZDT0QwMDAyLE5FWFQwMDEzLFBGR1NFRzAyIn0gDQogIH0sDQogICJqdGkiOiJFNjYyRTQ5RTFFMDJCRjAyIiwNCiAgImlzcyI6ImludGVybmFsIiwNCiAgImlhdCI6IjE1ODQ0ODg0ODYiLCAgDQogICJleHAiOiIxNTg0NTE3Mjg2Ig0KfQ.PvovtUGyDa8YY_DL_yV75BrVzbVPRoXlIk76T8rqKE0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryDLZfB4h2PEWtX4em
+Accept: application/json, text/plain, */*
+Sec-Fetch-Dest: empty
+coreip: 10.194.66.246:7070/DEV-3
+Origin: http://localhost:4202
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Referer: http://localhost:4202/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7
+Cookie: site-id=2; dtCookie=1$FBCD050F34ACCF77A60A89EF63434DEC
+
+###
+GET http://192.168.246.229:8080/v1/docService/documents?cpf=90982207034
+X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMzE4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIjEwLjEzMC4yMS4xMDUiLA0KICAgICAic291cmNlIjogIjEwLjE5NS4xODIuMTczOjQ1NDEwIiwNCiAgICAgImZwcmludCI6ICIiLCAgICAgDQogICAgICJhZ2VudElkIjogIkk5MDMxODciLA0KICAgICAidGlja2V0IjogIjgyRTI1RjgxRTZBODM3MkQiLA0KICAgICAic2Vzc2lvbklkIjogIjAwMUQ2MzVFOUQyM0U4NFgwMkM5NTk3NDMyRUE5Mzg1IiwNCiAgICAgImNyZWRlbnRpYWxzIjogIk5URTFNREF4TmtNelFUTXhOakl6TWpkRE16UTVPRFkwTjBWQ1FVTTNSalpDUmpnMFJFTkJSRE00TURCR01UbENRekZDTVRjM1JrWTVRVUU0T1VaRU4wRTVRVGs0UkVJZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ05UaEZPVEU0IiwNCiAgICAgImNsYWltcyI6IHsic3RhZmYiOnRydWUsImF1dGhvcml0aWVzIjoiQ0FTSTAwMDcsRkNPRDAwMDEsRkNPRDAwMDIsTkVYVDAwMTMsUEZHU0VHMDIifSANCiAgfSwNCiAgImp0aSI6IjgyRTI1RjgxRTZBODM3MkQiLA0KICAiaXNzIjoiaW50ZXJuYWwiLA0KICAiaWF0IjoiMTU4NDYzMzYxMyIsICANCiAgImV4cCI6IjE1ODQ2NjI0MTMiDQp9.QOs6Hekp6fiQk0Hr2C4HYi6t2yW6UdxLoe3rSAO_Y9g
+coreip: 10.194.66.246:7070/PB-745
+
+###
+GET http://192.168.246.229:8080/v1/docService/documents/786128/content
+// GET http://localhost:8070/docService/documents/1/content
+X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMzE4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIjEwLjEzMC4yMS4xMDUiLA0KICAgICAic291cmNlIjogIjE5Mi4xNjguNjAuNjQ6NTA0NDAiLA0KICAgICAiZnByaW50IjogIiIsICAgICANCiAgICAgImFnZW50SWQiOiAiSTkwMzE4NyIsDQogICAgICJ0aWNrZXQiOiAiRjAzMDczMTgyRUE3Q0VEQyIsDQogICAgICJzZXNzaW9uSWQiOiAiMDAxRDYzNUU5RDIzQ0FFWDAyQzk1OTc0MzJFQTcxMDQiLA0KICAgICAiY3JlZGVudGlhbHMiOiAiTlRFMU1EQXhOa016UVRNeE5qSXpNamRETXpRNU9EWTBOMFZDUVVNM1JqWkNSamcwUkVOQlJETTRNREJHTVRsQ1F6RkNNVGMzUmtZNVFVRTRPVVpFTjBFNVFUazRSRUlnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnTlRoRk9URTQiLA0KICAgICAiY2xhaW1zIjogeyJzdGFmZiI6dHJ1ZSwiYXV0aG9yaXRpZXMiOiJDQVNJMDAwNyxGQ09EMDAwMSxGQ09EMDAwMixORVhUMDAxMyxQRkdTRUcwMiJ9IA0KICB9LA0KICAianRpIjoiRjAzMDczMTgyRUE3Q0VEQyIsDQogICJpc3MiOiJpbnRlcm5hbCIsDQogICJpYXQiOiIxNTg0NjE3NDU2IiwgIA0KICAiZXhwIjoiMTU4NDY0NjI1NiINCn0.Q8_oM3PAAo5dgy3C_Xzq9rk-gRT_gjbWwLvF_ANs8T0
+coreip: 10.194.66.246:7070/DEV-3
+
+
+###
+curl 'http://localhost:4202/proposal/proposal/attachmentDocuments' 
+-H 'Connection: keep-alive' -H 'Pragma: no-cache' 
+-H 'Cache-Control: no-cache' -H 'DNT: 1' 
+-H 'X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMzE4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIjEyNy4wLjAuMSIsDQogICAgICJzb3VyY2UiOiAiMTkyLjE2OC42MC42NDo2MTM4NiIsDQogICAgICJmcHJpbnQiOiAiIiwgICAgIA0KICAgICAiYWdlbnRJZCI6ICJJOTAzMTg3IiwNCiAgICAgInRpY2tldCI6ICJFNjYyRTQ5RTFFMDJCRjAyIiwNCiAgICAgInNlc3Npb25JZCI6ICIwMDFENjM1RTlEMUYzNDlYMDJDOTQ3NDM5NjA1OTNDNiIsDQogICAgICJjcmVkZW50aWFscyI6ICJOVEUxTURBeE5qSkZRemd5TkRSQk5rUXhSVGt4UTBKR01VVTFOVGd6TlRORVFqRkRPREZCUWpoR09USXhRVFkxUVVRMVF6VXdNRVE0TURkRU0wSTNOams0TUVRelFUY2dJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdOemxCTUVJeSIsDQogICAgICJjbGFpbXMiOiB7InN0YWZmIjp0cnVlLCJhdXRob3JpdGllcyI6IkNBU0kwMDA3LEZDT0QwMDAxLEZDT0QwMDAyLE5FWFQwMDEzLFBGR1NFRzAyIn0gDQogIH0sDQogICJqdGkiOiJFNjYyRTQ5RTFFMDJCRjAyIiwNCiAgImlzcyI6ImludGVybmFsIiwNCiAgImlhdCI6IjE1ODQ0ODg0ODYiLCAgDQogICJleHAiOiIxNTg0NTE3Mjg2Ig0KfQ.PvovtUGyDa8YY_DL_yV75BrVzbVPRoXlIk76T8rqKE0' 
+-H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryDLZfB4h2PEWtX4em' -H 'Accept: application/json, text/plain, */*' -H 'Sec-Fetch-Dest: empty' -H 'coreip: 10.194.66.246:7070/DEV-3' -H 'Origin: http://localhost:4202' -H 'Sec-Fetch-Site: same-origin' -H 'Sec-Fetch-Mode: cors' -H 'Referer: http://localhost:4202/' -H 'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' -H 'Cookie: site-id=2; dtCookie=1$FBCD050F34ACCF77A60A89EF63434DEC' --data-binary $'------WebKitFormBoundaryDLZfB4h2PEWtX4em\r\nContent-Disposition: form-data; name="document"; filename="86755730300820200103085655076000Z.JPEG"\r\nContent-Type: image/jpeg\r\n\r\n\r\n------WebKitFormBoundaryDLZfB4h2PEWtX4em\r\nContent-Disposition: form-data; name="document"; filename="86755730300820200103085655076000Z.JPEG"\r\nContent-Type: image/jpeg\r\n\r\n\r\n------WebKitFormBoundaryDLZfB4h2PEWtX4em\r\nContent-Disposition: form-data; name="cpf"\r\n\r\n47531770334\r\n------WebKitFormBoundaryDLZfB4h2PEWtX4em\r\nContent-Disposition: form-data; name="docTypeUid"\r\n\r\n4\r\n------WebKitFormBoundaryDLZfB4h2PEWtX4em--\r\n' --compressed
+
+###
+curl --location --request POST 'http://192.168.246.229:8080/v1/docService/documents?uploadedDate=2019-11-10T20:22:16.168Z&icor=icor&className=className&cpf=38127861847' \
+--header 'X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMzE4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIk1BUVVJTkEwMSIsDQogICAgICJzb3VyY2UiOiAiMTkyLjE2OC42MC42NDo2MTk2MyIsDQogICAgICJmcHJpbnQiOiAiIiwgICAgIA0KICAgICAiYWdlbnRJZCI6ICJJOTAzMTg3IiwNCiAgICAgInRpY2tldCI6ICI2OTk3NDBEN0NFMDE4RUZDIiwNCiAgICAgInNlc3Npb25JZCI6ICIwMDFENjM1RTlEMjQyNzNYMDJDOTU5NzQzMkVBQzZBNyIsDQogICAgICJjcmVkZW50aWFscyI6ICJOVEUxTURBeE5rTXpRVE14TmpJek1qZERNelE1T0RZME4wVkNRVU0zUmpaQ1JqZzBSRU5CUkRNNE1EQkdNVGxDUXpGQ01UYzNSa1k1UVVFNE9VWkVOMEU1UVRrNFJFSWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdOVGhGT1RFNCIsDQogICAgICJjbGFpbXMiOiB7InN0YWZmIjp0cnVlLCJhdXRob3JpdGllcyI6IkNBU0kwMDA3LEZDT0QwMDAxLEZDT0QwMDAyLE5FWFQwMDEzLFBGR1NFRzAyIn0gDQogIH0sDQogICJqdGkiOiI2OTk3NDBEN0NFMDE4RUZDIiwNCiAgImlzcyI6ImludGVybmFsIiwNCiAgImlhdCI6IjE1ODQ2NzAwMjIiLCAgDQogICJleHAiOiIxNTg0Njk4ODIyIg0KfQ.sm7d8zyELVSmtL_q7IL6mAoNetRgCa40q7YhHY_PqQ8' \
+--header 'Content-Type: multipart/form-data' \
+--header 'coreip: 10.194.66.246:7070/DEV-3' \
+--form 'application/octet-stream=@/C:/WORK/teste.txt' \
+--form 'coreip=10.194.66.246:7070/DEV-3'
+-F "file1=@/C:/WORK/teste.txt"
+
+
+###
+POST http://192.168.246.229:8080/v1/docService/documents?uploadedDate=2020-03-20T00:00:00.168Z&icor=icor&className=className&cpf=55884970072 HTTP/1.1
+# POST http://localhost:8070/docService/documents?uploadedDate=2020-03-20T00:00:00.168Z&icor=icor&className=className&cpf=55884970072 HTTP/1.1
+# POST http://192.168.246.240:7070/DEV-3/docService/documents?uploadedDate=2020-03-20T00:00:00.168Z&icor=icor&className=className&cpf=55884970072 HTTP/1.1
+# POST http://192.168.246.240:7070/PB-475/docService/documents?uploadedDate=2020-03-20T00:00:00.168Z&icor=icor&className=className&cpf=55884970072 HTTP/1.1
+X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMjg4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIk1BUVVJTkEwMSIsDQogICAgICJzb3VyY2UiOiAiMTkyLjE2OC42MC42NDo1NDg5NCIsDQogICAgICJmcHJpbnQiOiAiIiwgICAgIA0KICAgICAiYWdlbnRJZCI6ICJJOTAyODg3IiwNCiAgICAgInRpY2tldCI6ICJBRUE2ODY0RTU4OTc4OURDIiwNCiAgICAgInNlc3Npb25JZCI6ICIwMDFENjM1RTlEMzc1OEVYMDJDOUEyMzZBNjdGNzYyRiIsDQogICAgICJjcmVkZW50aWFscyI6ICJOVEUxTURBeE5rVTFRek5DTlVVMFJUTkZRMEV3T1RnMU5VUXdOamhGTVRFd09FTkZOa1V4UkRVeU1qSkJRVFpGTkRaRU9UQkVNakUwTUVNd1FUSkRNVEkxUXpWRVJEVWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdNemsxT0RrMCIsDQogICAgICJjbGFpbXMiOiB7InN0YWZmIjp0cnVlLCJhdXRob3JpdGllcyI6IkNBU0kwMDA3LEZDT0QwMDAxLEZDT0QwMDAyLE5FWFQwMDEyLFBGR1NFRzAyIn0gDQogIH0sDQogICJqdGkiOiJBRUE2ODY0RTU4OTc4OURDIiwNCiAgImlzcyI6ImludGVybmFsIiwNCiAgImlhdCI6IjE1ODUzMTIwMDgiLCAgDQogICJleHAiOiIxNTg1MzQwODA4Ig0KfQ.ax4ZnMW6G7yAgg-BUZ1MYbHhtptomBuTbkoO-ubSyzg
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+coreip: 10.194.66.246:7070/PB-745
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="application/octet-stream"; filename="/C:/WORK/teste.jpeg"
+Content-Type: image/jpeg
+(data)
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="coreip"
+10.194.66.246:7070/PB-745
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+
+
+###
+// POST http://192.168.246.229:8080/v1/docService/documents?uploadedDate=2020-03-20T00:00:00.168Z&icor=icor&className=className&cpf=55884970072 HTTP/1.1
+POST http://localhost:8070/docService/documents?uploadedDate=2020-03-20T00:00:00.168Z&icor=icor&className=className&cpf=55884970072 HTTP/1.1
+//X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiSTkwMzE4NyIsDQogICJ1c2VyRGF0YSI6IHsNCiAgICAgImhvc3ROYW1lIjogIk1BUVVJTkEwMSIsDQogICAgICJzb3VyY2UiOiAiMTkyLjE2OC42MC42NDo2MTk2MyIsDQogICAgICJmcHJpbnQiOiAiIiwgICAgIA0KICAgICAiYWdlbnRJZCI6ICJJOTAzMTg3IiwNCiAgICAgInRpY2tldCI6ICI2OTk3NDBEN0NFMDE4RUZDIiwNCiAgICAgInNlc3Npb25JZCI6ICIwMDFENjM1RTlEMjQyNzNYMDJDOTU5NzQzMkVBQzZBNyIsDQogICAgICJjcmVkZW50aWFscyI6ICJOVEUxTURBeE5rTXpRVE14TmpJek1qZERNelE1T0RZME4wVkNRVU0zUmpaQ1JqZzBSRU5CUkRNNE1EQkdNVGxDUXpGQ01UYzNSa1k1UVVFNE9VWkVOMEU1UVRrNFJFSWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdOVGhGT1RFNCIsDQogICAgICJjbGFpbXMiOiB7InN0YWZmIjp0cnVlLCJhdXRob3JpdGllcyI6IkNBU0kwMDA3LEZDT0QwMDAxLEZDT0QwMDAyLE5FWFQwMDEzLFBGR1NFRzAyIn0gDQogIH0sDQogICJqdGkiOiI2OTk3NDBEN0NFMDE4RUZDIiwNCiAgImlzcyI6ImludGVybmFsIiwNCiAgImlhdCI6IjE1ODQ2NzAwMjIiLCAgDQogICJleHAiOiIxNTg0Njk4ODIyIg0KfQ.sm7d8zyELVSmtL_q7IL6mAoNetRgCa40q7YhHY_PqQ8
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywMx7fjg2EFtFIBOu
+coreip: 10.194.66.246:7070/DEV-3
+
+------WebKitFormBoundarywMx7fjg2EFtFIBOu
+Content-Disposition: form-data; name="document"; filename="/C:/WORK/teste.jpeg"
+Content-Type: application/octet-stream
+
+(data)
+# ------WebKitFormBoundarywMx7fjg2EFtFIBOu
+# Content-Disposition: form-data; name="document"; filename="/C:/WORK/teste.jpeg"
+# Content-Type: image/jpeg
+
+
+# ------WebKitFormBoundarywMx7fjg2EFtFIBOu
+# Content-Disposition: form-data; name="cpf"
+
+# 55884970072
+# ------WebKitFormBoundarywMx7fjg2EFtFIBOu
+# Content-Disposition: form-data; name="docTypeUid"
+
+# 4
+------WebKitFormBoundarywMx7fjg2EFtFIBOu--
+
+###
+### --------------------------------------------------------------------------
+# DOCUMENT ATT
+# --------------------------------------------------------------------------
+# @name document_att
+POST http://localhost:8070/docService/documents HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: multipart/form-data
+
+{
+  "icor":"541",
+  "className":"docGccPEssoaFisicaComprovanteEndereco",
+  "cpf":[47531770334],
+  "mimeType":["IMAGE/JPG"],
+  "extension":["JPEG"],
+  "uploadedDate":["2020-03-17T14:16:06.107"]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
+# REFERENCE INFO
+# GET http://localhost:8000/v1/referenceInfo HTTP/1.1
+GET http://192.168.246.240:7070/PB-745/next-platform/referenceInfo HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreipDev}}
+
+###
+# ONBOARD STATUS APP
+PUT http://localhost:8000/v1/applications HTTP/1.1
+X-Next-SystemCallWithCustomerUid: 36492
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+{"customerName":"TESTE DERIVA","email":"EMAIL@EMAIL.COM","birthdate":"1995-03-08","usePhoneNumberList":null,"phoneNumbers":null,"useAddressList":true,"addresses":[{"uniqueID":null,"customerUid":null,"addressType":1,"mailingAddressInd":"Y","postalCode":77060118,"streetName":"R RORAIMA","streetNumber":"S/N","neighbourhood":"JARDIM AURENY I","addressAdditionalInfo":null,"cityId":0,"stateCd":"TO"}],"useFatcaResponseList":null,"fatcaResponses":null,"useAssetList":null,"customerAssets":null,"birthPlace":null,"professionId":null,"professionCategoryId":null,"maritalStatus":null,"spouseName":null,"gender":null,"monthlyIncome":null,"rgId":"41555366e","cnhId":null,"documentIssuerDepartment":"SSP","documentIssuerStateId":"11","countryOfBirth":46,"motherName":"FULANA DA SILVA","missingMotherNameReasonId":0,"fatherName":null,"missingFatherNameReasonId":1,"referencePersonTypeId":1,"referencePersonName":"NEXT","referencePersonCountryCode":null,"referencePersonAreaCode":null,"referencePersonPhoneNr":1111111111,"pepRoleId":null,"pepRelatedId":null,"pepRelatedCpf":null,"educationLevelId":null,"educationInstitutionStateId":null,"eduInstitutionName":"NEXT","eduMajor":"N","eduInstitutionStateCd":"SC","eduCompletionDt":"2020-03-20","eduCurrentSemester":null,"eduLastUpdatedDt":"2020-03-20","invoiceDay":4,"cityOfBirth":32999,"stateOfBirth":36,"nickname":null,"pepRoleResponse":"N","pepRelatedResponse":"N","documentIssueDate":"2020-03-25","civilCapacityCode":null,"twitterAccount":null,"isUniversityStudent":null,"documentVersion":null,"requiresProofOfAddressSupport":null,"barAssociationNumber":null,"barAssociationDateOfIssue":null,"proofOfAddressSupportDocumentType":null,"gpsPermissionInd":"true","pinPointChangedInd":"false","pinPointLatitude":null,"pinPointLongitude":null,"universityStudent":null}
+
+###
+# applicants branches
+POST http://localhost:8080/v1/applicants/branches HTTP/1.1
+X-Next-SystemCallWithCustomerUid: 36492
+X-Next-AuthToken: {{token}}
+Token: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+{
+  "customerUid": 36492
+}
+
+
+###
+# applicants branches
+POST http://localhost:8080/v1/profiles/branches HTTP/1.1
+X-Next-SystemCallWithCustomerUid: 36492
+X-Next-AuthToken: {{token}}
+Token: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+{
+  "customerUid": 36492
+}
+
+
+
+
+
+
+###
+# registration
+POST http://localhost:8060/preregistration?deviceId=123 HTTP/1.1
+X-Next-AuthToken: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiIiwNCiAgInVzZXJEYXRhIjp7ImNsYWltcyI6eyJjdXN0b21lciI6dHJ1ZX0sImFjY291bnRzIjpbeyJjdXN0b21lcklkIjo4MzAwLCJhY2NvdW50TnVtYmVyIjo3ODAzLCJicmFuY2giOjM3NTAsInVuaXF1ZUlEIjozMjA0fV0sImRldmljZUlkIjoiT3B0aW9uYWwuZW1wdHkiLCJjdXN0b21lciI6eyJnZW5kZXJDb2RlIjoiRiIsIm1hcml0YWxTdGF0dXNJZCI6IlNJTkdMRSIsIm1vbnRobHlJbmNvbWVBbW91bnQiOiIxNTAwMDAuMCIsImNwZiI6IjUxODc4NTE1MDA0IiwiYmlydGhEYXRlIjoiMTk5Ny0wNi0wMSIsInVuaXF1ZUlEIjo4MzAwLCJlZHVjYXRpb25MZXZlbElkIjoiMCJ9fQ0KfQ.A3FidSL6i6F8a9woPeEBJFizJ7fhAqQ44LbtcjKF9DQ
+Token: eyAgICJhbGciOiAiSFMyNTYiIH0.ew0KICAic3ViIjoiIiwNCiAgInVzZXJEYXRhIjp7ImNsYWltcyI6eyJjdXN0b21lciI6dHJ1ZX0sImFjY291bnRzIjpbeyJjdXN0b21lcklkIjo4MzAwLCJhY2NvdW50TnVtYmVyIjo3ODAzLCJicmFuY2giOjM3NTAsInVuaXF1ZUlEIjozMjA0fV0sImRldmljZUlkIjoiT3B0aW9uYWwuZW1wdHkiLCJjdXN0b21lciI6eyJnZW5kZXJDb2RlIjoiRiIsIm1hcml0YWxTdGF0dXNJZCI6IlNJTkdMRSIsIm1vbnRobHlJbmNvbWVBbW91bnQiOiIxNTAwMDAuMCIsImNwZiI6IjUxODc4NTE1MDA0IiwiYmlydGhEYXRlIjoiMTk5Ny0wNi0wMSIsInVuaXF1ZUlEIjo4MzAwLCJlZHVjYXRpb25MZXZlbElkIjoiMCJ9fQ0KfQ.A3FidSL6i6F8a9woPeEBJFizJ7fhAqQ44LbtcjKF9DQ
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+{
+  "name":"Kylo Ren",
+  "cpf":"72317635885",
+  "email":"kylo@ren.space",
+  "mobileCountryCode":"22",
+  "mobileAreaCode":"11",
+  "mobilePhoneNumber":12345678,
+  "smsPermission":true,
+  "platform":"Android",
+  "manufacturer":"Samsung",
+  "deviceType":"Smartphone",
+  "os":"Android 4.3",
+  "timeZone":"GMT+03:00",
+  "model":"Galaxy S10",
+  "latitude":"10.9999999",
+  "longitude":"11.00000000",
+  "sendedAt":{
+    "month":"MARCH",
+    "year":2020,
+    "dayOfMonth":26,
+    "dayOfWeek":"THURSDAY",
+    "dayOfYear":86,
+    "monthValue":3,
+    "nano":29000000,
+    "hour":22,
+    "minute":26,
+    "second":10,
+    "chronology":{
+      "id":"ISO",
+      "calendarType":"iso8601"
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+###
+# applicants branches
+POST http://localhost:8080/v1/securityEngine/derivationReceipt HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+{
+  "accountOpening": "true",
+  "proposalEvaluation": {
+      "customerUID": "865212",
+      "proposalEvaluationUID" : "1234",
+      "sequenceProposal": "1"
+  }
+}
+
+
+# http://localhost:7000/next-corebank/#!/funcionario/assinaturaDigitalClienteUsingGET
+###
+# SARH
+# GET http://localhost:8060/v1/referenceInfo HTTP/1.1
+GET http://localhost:7000/next-corebank/recursoshumanos/next/funcionarios/36399?dados=nome HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: {{coreip}}
+
+
+
+
+
+# {{base-derivation-url}}{{derivation-context}}/v1/workflow/proposalDecision
+# {
+#     "decisionStage": "DERIVED_N2_ENGINE",
+#     "prospectProposal": {
+#         "customer": {
+#             "customerUid": 36811
+#         },
+#         "proposalUid": 20200323170230828,
+#         "prospectProposalUid": 636,
+#         "sequenceProposalUid": 2
+#     },
+#     "timestamp": "2020-03-17 14:07:00",
+#     "userId": "0"
+# }
+
+
+
+
+
+
+
+
+###
+# GET http://192.168.246.240:7070/DEV-3/next-derivation-engine/actuator/info  HTTP/1.1
+# GET http://192.168.246.240:7070/PB-745/next-document-engine/actuator/info  HTTP/1.1
+GET http://192.168.246.240:8080/v1/profiles/getCustomerInformation  HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+###
+# POST http://192.168.246.229:8080/v1/login/internal HTTP/1.1
+POST http://192.168.246.240:7070/DEV-3/login/internal HTTP/1.1
+Content-Type: {{contentType}}
+
+{"agentId":"I904687","host":"unknown","password":"testemar"}
+
+###
+curl "http://192.168.246.229:8080/v1/login/internal" -H "Content-type: application/json;charset=UTF-8" --data-binary '{"agentId":"I902887","host":"unknown","password":"testemar"}'
+
+
+### --------------------------------------------------------------------------
+# CREATE PROPOSAL TEST - PROPOSAL
+# --------------------------------------------------------------------------
+@create_cpf = 05856909607
+@create_customerUid = 4055
+### --------------------------------------------------------------------------
+# create_test
+# --------------------------------------------------------------------------
+# @name create_test
+GET {{PROPOSAL}}/create-test/create?customerUid={{create_customerUid}}&cpf={{create_cpf}}&email={{create_customerUid}}@capgemini.com HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+### --------------------------------------------------------------------------
+# proposal_full
+# --------------------------------------------------------------------------
+# @name proposal_full
+GET {{PROPOSAL}}/proposal-data/proposals/106 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+### --------------------------------------------------------------------------
+# proposal_documentIssuer
+# --------------------------------------------------------------------------
+# @name proposal_documentIssuer
+GET {{PROPOSAL}}/proposal-domain/documentIssuer/7 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+### --------------------------------------------------------------------------
+# proposal_listaOrgaosEmissoresUsingGET
+# --------------------------------------------------------------------------
+# @name proposal_listaOrgaosEmissoresUsingGET
+# GET http://192.168.245.212:8080/v2/cadastros/orgaosEmissores?documento=1 HTTP/1.1
+GET http://192.168.245.212:8080/v2/cadastros/orgaosEmissores?documento=21 HTTP/1.1
+Content-Type: {{contentType}}
+access-token: ZaofRC7XjPb3
+
+
+
+
+
+### --------------------------------------------------------------------------
+# resumeN3
+# --------------------------------------------------------------------------
+# @name resumeN3
+GET {{PROPOSAL}}/proposal-data/resumeN3/20200124012213072 HTTP/1.1
+# GET {{PROPOSAL}}/proposal-data/resumeN3/20200114140135106 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+### --------------------------------------------------------------------------
+# PROFILES
+# --------------------------------------------------------------------------
+# @name PROFILES
+GET {{PROPOSAL}}/profile/profiles HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+####
+GET {{PROPOSAL}}/proposal-data/generalSearch/?cpf=05856909607&proposalUid=0&email=&page=0&size=10&userId=0  HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+coreip: 10.194.66.246:7070/DEV-3
+
+
+### --------------------------------------------------------------------------
+# FunnelViewResponse
+# --------------------------------------------------------------------------
+# @name FunnelViewResponse
+POST {{DERIVATION}}/dashboard/funnelView HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+   "dateFrom": "2020-01-01 00:00:00",
+   "dateTo": "2020-01-10 00:00:00"
+}
+
+
+
+
+
+
+### --------------------------------------------------------------------------
+# StageManagementResponse
+# --------------------------------------------------------------------------
+# @name StageManagementResponse
+POST {{PROPOSAL}}/services/stage-management/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+   "inputDate": "2019-12-01 00:00:00"
+}
+
+
+
+
+
+
+### --------------------------------------------------------------------------
+# StageListResponse
+# --------------------------------------------------------------------------
+# @name StageListResponse
+GET {{PROPOSAL}}/services/stage-list/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# StageManagementGlobalVisionResponse
+# --------------------------------------------------------------------------
+# @name StageManagementGlobalVisionResponse
+POST {{PROPOSAL}}/services/stage-management-global-vision/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+   "startDateFrom": "2019-12-01 00:00:00",
+   "startDateTo": "2019-12-16 00:00:00",
+   "endDateFrom": "2019-12-01 00:00:00",
+   "endDateTo": "2019-12-16 00:00:00",
+   "stageProposalUid": 1
+}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# SADIF_test
+# --------------------------------------------------------------------------
+# @name SADIF_test
+GET {{SADIF}}/FnextTransAPITeste/api/FnextTransAPI?id=8300 HTTP/1.1
+Content-Type: {{contentType}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_1
+# --------------------------------------------------------------------------
+# @name DERIVATION_1
+GET http://localhost:8090/next-derivation-engine/actuator/info HTTP/1.1
+Content-Type: {{contentType}}
+
+### --------------------------------------------------------------------------
+# DERIVATION_2
+# --------------------------------------------------------------------------
+# @name DERIVATION_2
+GET http://localhost:8090/next-proposal-evaluation/v1/prospect-proposal/1&1 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+### --------------------------------------------------------------------------
+# DERIVATION_2_1
+# --------------------------------------------------------------------------
+# @name DERIVATION_2_1
+GET http://localhost:8090/next-proposal-evaluation/v1/services/teste/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_3
+# --------------------------------------------------------------------------
+# @name DERIVATION_3
+GET http://localhost:8090/next-derivation-engine/v1/updateProposalStatus/example2 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+# {
+#   "timestamp": "2019-10-20 13:49:00",
+#   "userId": 200537,
+#   "decisionId": "1",
+#   "prospectProposal": {
+#        "prospectProposalUid":20191021125709,
+#        "proposalUid":1,
+#        "sequenceProposalUid":1, 
+#        "customer":{"customerUid":5897789}}
+# } 
+
+### --------------------------------------------------------------------------
+# DERIVATION_4
+# --------------------------------------------------------------------------
+# @name DERIVATION_4
+PUT http://localhost:8091/next-derivation-engine/v1/update-proposal-status/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+     "timestamp": "2019-10-20 13:49:00",
+     "statusId": "200537",
+     "prospectProposal": {
+           "customer": {
+                "customerUid": "5897789"
+           },
+           "prospectProposalUid": "20191021125709",
+           "proposalUid": "1",
+           "sequenceProposalUid": "1"
+     }
+}
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL_1
+# --------------------------------------------------------------------------
+# @name PROPOSAL_1
+POST http://localhost:8091/next-proposal-evaluation/v1/receive-proposal/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+     "timestamp": "2019-10-20 13:49:00",
+     "userId": "200537",
+     "prospectProposal": {
+           "customer": {
+                "customerUid": "5897789"
+           },
+           "prospectProposalUid": "20191021125709",
+           "proposalUid": "1",
+           "sequenceProposalUid": "1"
+     }
+}
+
+
+
+# ### --------------------------------------------------------------------------
+# # WSGUE - Cadastro
+# # --------------------------------------------------------------------------
+# # @name WSGUE.Cadastro
+# POST {{WSGUE_HO}}/1.0/Usuario HTTP/1.1
+# Authorization: {{AutenticacaoEmpresaParceira.response.body.objeto.accessToken}}
+# Content-Type: {{contentType}}
+
+# {
+# 	"Documento": "CPF",
+# 	"CpfCnpj": "{{CpfCnpj}}",
+# 	"Tipo": "Comum",
+# 	"Senha": "123456",
+# 	"Situacao": "Ativo",
+# 	"Localizacao":{  
+# 		"Longitude": -21.3929,
+# 		"Latitude": -42.6901
+# 	},
+# 	"Origem": "WebSite",
+# 	"Nome": "{{nome}}",
+# 	//"Email": "{{Email}}",
+# 	"Celular": "{{Celular}}"
+# }
+
+
+
+
+
+
+
+
+
+
+
+
+@customerUid=5897789
+# @proposalUid=20191021125709
+@prospectProposalUid={{proposalUid}}
+
+### --------------------------------------------------------------------------
+# DERIVATION_4
+# --------------------------------------------------------------------------
+# @name DERIVATION_ReceiveProposal
+POST http://localhost:8091/next-derivation-engine/v1/receive-proposal/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+ 
+{
+    "timestamp" : "2019-10-25 13:49:00",
+    "userId" : 8300,
+    "prospectProposal" : {
+          "customer" : {
+               "customerUid" : "{{customerUid}}"
+          },
+          "prospectProposalUid": "{{prospectProposalUid}}",
+          "proposalUid": "{{proposalUid}}",
+          "sequenceProposalUid" : 1
+    }
+}
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_ProposalStage
+# --------------------------------------------------------------------------
+# @name DERIVATION_ProposalStage
+POST http://localhost:8090/next-derivation-engine/v1/proposal-stage/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+ 
+{
+    "userId" : 8300, 
+    "prospectProposal" : {
+          "customer" : {
+               "customerUid" : "1927" 
+          },
+          "prospectProposalUid": "256", 
+          "proposalUid": "20191025145153327", 
+          "sequenceProposalUid" : 1 
+    }
+}
+
+# {
+#     //"timestamp" : "2019-10-25 13:49:00",
+#     "userId" : 8300, // Usuario logado
+#     "prospectProposal" : {
+#          // campos de domínio da tabela nextproposalevaluation.prospect_proposal
+#           "customer" : {
+#                "customerUid" : "1927" //id do cliente (APP) UNIQUE_ID
+#           },
+#           "prospectProposalUid": "256", //sequencial da tabela PROSPECT_PROPOSAL_UID
+#           "proposalUid": "20191025145153327", //chave da proposta gerada na recepção PROPOSAL_UID 
+#           "sequenceProposalUid" : 1 //versão da proposta SEQUENCE_PROPOSAL_UID
+#     }
+# }
+
+# @customerUid=1927
+# @proposalUid=201
+# @prospectProposalUid=20191025124001937
+ 
+### --------------------------------------------------------------------------
+# DERIVATION_4
+# --------------------------------------------------------------------------
+# @name DERIVATION_UpdateProposalStatus
+PUT http://10.130.56.11:8090/next-derivation-engine/v1/updateProposalStatus/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+ 
+{
+     "timestamp": "2019-10-20 13:49:00",
+     "statusId": 2,
+     "prospectProposal": {
+           "customer": {
+                "customerUid": "{{customerUid}}"
+           },
+           "prospectProposalUid": "{{prospectProposalUid}}",
+           "proposalUid": "{{proposalUid}}",
+           "sequenceProposalUid": 1
+     }
+}
+
+
+
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL_2
+# http://localhost:4200/next-proposal-evaluation/v1/services/proposal-stage-list/
+# --------------------------------------------------------------------------
+# @name PROPOSAL_2
+POST http://localhost:8090/next-proposal-evaluation/v1/services/proposal-stage-list/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+    "userId" : "34466", 
+    "prospectProposal" : {
+          "customer" : {
+               "customerUid" : "34466" 
+          },
+          "prospectProposalUid": "75", 
+          "proposalUid": "20191128162418548", 
+          "sequenceProposalUid" : 1 
+    }
+}
+
+
+# http://localhost:8090/next-proposal-evaluation/v1/ 
+# {{ proposalevaluation  }}prospect-proposal/general-search?proposalUid=20191101134211368&cpf=12364796512 
+
+
+
+
+
+
+
+
+@etapas_proposalUid = 20191201201522543
+### --------------------------------------------------------------------------
+# PROPOSAL_Create_test
+# --------------------------------------------------------------------------
+# @name PROPOSAL_Create_test
+GET http://localhost:8091/next-derivation-engine/v1/stages-test/stages?proposalUid={{etapas_proposalUid}} HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+
+
+
+
+### --------------------------------------------------------------------------
+# TESTE
+# --------------------------------------------------------------------------
+# @name TESTE
+GET http://192.168.246.240:7070/PB-745 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL_3
+# --------------------------------------------------------------------------
+# @name PROPOSAL_3
+GET http://localhost:8090/next-proposal-evaluation/v1/proposal-data/generalSearch?cpf=05856909607&proposalUid=0&email=&page=0&size=2&userId=0 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+### --------------------------------------------------------------------------
+# PROPOSAL_3
+# --------------------------------------------------------------------------
+# @name PROPOSAL_3
+GET http://localhost:4201/v1/proposal-data/generalSearch?cpf=05856909607&proposalUid=0&email=&page=0&size=2&userId=0 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+
+
+###
+POST http://localhost:8090/next-proposal-evaluation/v1/profile/ HTTP/1.1
+Content-Type: {{contentType}}
+X-Next-AuthToken: {{token}}
+
+###
+POST http://192.168.246.240:7070/DEV-4/login/internal/ HTTP/1.1
+Content-Type: {{contentType}}
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_4
+# --------------------------------------------------------------------------
+# @name DERIVATION_GeneralSearch
+POST http://localhost:8091/next-derivation-engine/v1/general-search/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+ 
+{
+  "prospectProposalList":[
+    {
+           "customer": {
+                "customerUid": 1098
+           },
+           "prospectProposalUid": 3,
+           "proposalUid": 20191211154634861,
+           "sequenceProposalUid": 1
+    }
+  ]
+}
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_4
+# --------------------------------------------------------------------------
+# @name DERIVATION_GeneralSearch
+POST http://localhost:8091/next-derivation-engine/v1/proposal-decision/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+  "timestamp": "2019-11-28 00:00:00",
+  "userId": 8300,
+  "decisionId": 5,
+  "prospectProposal": {
+    "prospectProposalUid": 10,
+    "proposalUid": 20191127142235016,
+    "sequenceProposalUid": 2,
+    "customer": {
+      "customerUid": 34398
+    }
+  }
+}
+
+{
+  "timestamp": "2019-12-04 08:57:30",
+  "userId": 8300,
+  "decisionId": 1,
+  "prospectProposal": {
+    "customer": {
+      "customerUid": 1024
+    },
+    "prospectProposalUid": 199,
+    "proposalUid": 20191204085225585,
+    "sequenceProposalUid": 1,
+    "detailProspectProposal": null,
+    "prospectRegistrationData": null,
+    "addressProspectProposal": null,
+    "proposalAnalysisDecision": null,
+    "internalRevenueProspect": null,
+    "externalProspectValidation": null,
+    "listDocumentRequestProposal": null,
+    "user": null
+  }
+}
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_ProposalInformation
+# --------------------------------------------------------------------------
+# @name DERIVATION_ProposalInformation
+GET http://localhost:8091/next-derivation-engine/v1/proposal-information/83&1 HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+
+
+@customerUid=0000001
+# @cpf=12364796512
+# @cpf=00000000001
+# @email=email@gmail.com
+
+
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_status_reverter-proposal
+# --------------------------------------------------------------------------
+# @name DERIVATION_status_reverter
+POST http://localhost:8091/next-derivation-engine/v1/status-reverter/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+  "proposalUid": 107,
+  "sequenceProposalUid": 1,
+  "justification": "TESTE"
+}
+
+
+
+### --------------------------------------------------------------------------
+# Reprocess_Proposal
+# --------------------------------------------------------------------------
+# @name Reprocess_Proposal
+POST http://localhost:4200/next-proposal-evaluation/v1/reprocess-proposal/ HTTP/1.1
+# POST http://localhost:8091/next-derivation-engine/v1/reprocess-proposal/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+  "proposalUid": 107,
+  "sequenceProposalUid": 1,
+  "justification": "TESTE"
+}
+
+
+### --------------------------------------------------------------------------
+# DERIVATION_status_reverter
+# --------------------------------------------------------------------------
+# @name DERIVATION_status_reverter
+POST http://localhost:8091/next-derivation-engine/v1/status-reverter/ HTTP/1.1
+X-Next-AuthToken: {{token}}
+Content-Type: {{contentType}}
+
+{
+   "proposalAnalysisDecisionUid": null,
+   "analysisStatusDecision": null,
+   "prospectProposal": null,
+   "analysisReason": null,
+   "proposalAnalysisDecisionUid": null,
+   "profiles": null,
+   "createdOn": null,
+   "createdBy": null,
+   "updateOn": null,
+   "updatedBy": null,
+
+   "analysisDecisionUid":7,
+   "analysisReasonUid":10,
+   "analysisReason":null,
+   "analysisSubReason":true,
+   "descriptionAnalysis":"descricão n2",
+   "observationAnalysis":"observação n2",
+   "proposalUid":20191119013446896,
+   "sequenceProposalUid":1,
+   "customer":{
+      "customerUid":3
+   },
+   "createUserUid":1,
+   "updateUserUid":1,
+   "detailAnalysisReasons":[]
+}
