@@ -100,7 +100,6 @@ app.all('/v1/preregistrations/onboardingStatus*', (req, res, next) => { req.url 
 app.all('/v1/applications*', (req, res, next) => { 
   // req.url = '/applications'; 
   req.url = urlPlatform + req.url; 
-  console.log(req.url)
   return platformServiceProxy(req, res, next); 
 });
 app.all('/v1/referenceInfo*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
