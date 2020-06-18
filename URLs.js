@@ -9,7 +9,7 @@ module.exports = {
   PROPOSAL: 'http://localhost:8090',
   DERIVATION: 'http://localhost:8091',
   SECURITY: 'http://localhost:8092',
-  PLATFORM: 'http://localhost:8060',
+  PLATFORM: 'http://localhost:8061',
   DOCUMENT: 'http://localhost:8070'
 
 };

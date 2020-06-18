@@ -73,7 +73,6 @@ app.get('/api', (req, res, next) => apiServiceProxy(req, res, next));
 
 // PROPOSAL
 app.all('/v1/profile/profiles', (req, res, next) => { req.url = urlProposal + req.url; return proposalServiceProxy(req, res, next); });
-app.all('/v1/profile/userHost', (req, res, next) => { req.url = urlProposal + req.url; return proposalServiceProxy(req, res, next); });
 // let cpUpload = upload.any();
 // let cpUpload = upload.fields([{ name: 'document', maxCount: 1 }, { name: 'document', maxCount: 1 }]);
 // app.post('/v1/proposal/attachmentDocuments', (req, res, next) => { 
@@ -95,23 +94,16 @@ app.all('/v1/matrix-parameter*', (req, res, next) => { req.url = urlSecurity + r
 app.all('/v1/contingency*', (req, res, next) => { req.url = urlSecurity + req.url; return securityServiceProxy(req, res, next); });
 
 // PLATFORM
-app.all('/v1/profiles*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v1/preregistrations/onboardingStatus*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v1/applications*', (req, res, next) => { 
-  // req.url = '/applications'; 
-  req.url = urlPlatform + req.url; 
-  return platformServiceProxy(req, res, next); 
-});
-app.all('/v1/referenceInfo*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v1/applicants/branches*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v1/recursoshumanos*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v1/log*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v2/log*', (req, res, next) => { req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/profiles*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/preregistrations/onboardingStatus*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/applications*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/referenceInfo*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/applicants/branches*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/recursoshumanos*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/log*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v2/log*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
 
 // DOCUMENT
-app.all('/v1/docService/documents/**', (req, res, next) => { 
-  // req.url = setPreSite ? '/v1/docService/documents/**' : 'docService/documents/**';
-  return documentServiceProxy(req, res, next); 
-});
+app.all('/v1/docService/documents/**', (req, res, next) => { return documentServiceProxy(req, res, next); });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
