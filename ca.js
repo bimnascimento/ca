@@ -33,7 +33,7 @@ const securityServiceProxy = httpProxy(setLocalSecurity ? SECURITY : SERVER);
 const platformServiceProxy = httpProxy(setLocalPlatform ? PLATFORM : SERVER);
 const documentServiceProxy = httpProxy(setLocalDocument ? DOCUMENT : SERVER);
 
-let setPreSite = false;
+let setPreSite = true;
 
 const urlProposal = setLocalProposal ? '/next-proposal-evaluation' : setPreSite ? '/PB-745/next-proposal-evaluation' : '/DEV-3/next-proposal-evaluation';
 const urlDerivation = setLocalDerivation ? '/next-derivation-engine' : setPreSite ? '/PB-745/next-derivation-engine' : '/DEV-3/next-derivation-engine';
@@ -104,6 +104,6 @@ app.all('/v1/log*', (req, res, next) => { req.url = setPreSite ? req.url : req.u
 app.all('/v2/log*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
 
 // DOCUMENT
-app.all('/v1/docService/documents/**', (req, res, next) => { return documentServiceProxy(req, res, next); });
+app.all('/v1/docService/documents*', (req, res, next) => { req.url = urlDocument + req.url; return documentServiceProxy(req, res, next); });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
