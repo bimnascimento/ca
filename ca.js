@@ -24,8 +24,8 @@ const apiServiceProxy = httpProxy(API_URL);
 let setLocalProposal = true;
 let setLocalDerivation = true;
 let setLocalSecurity = true;
-let setLocalPlatform = true;
-let setLocalDocument = true;
+let setLocalPlatform = false;
+let setLocalDocument = false;
 
 const proposalServiceProxy = httpProxy(setLocalProposal ? PROPOSAL : SERVER);
 const derivationServiceProxy = httpProxy(setLocalDerivation ? DERIVATION : SERVER);
