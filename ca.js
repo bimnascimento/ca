@@ -21,8 +21,8 @@ const {
 
 const apiServiceProxy = httpProxy(API_URL);
 
-let setLocalProposal = true;
-let setLocalDerivation = true;
+let setLocalProposal = false;
+let setLocalDerivation = false;
 let setLocalSecurity = true;
 let setLocalPlatform = false;
 let setLocalDocument = false;
