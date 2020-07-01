@@ -31,9 +31,9 @@ const proposalServiceProxy = httpProxy(setLocalProposal ? PROPOSAL : SERVER);
 const derivationServiceProxy = httpProxy(setLocalDerivation ? DERIVATION : SERVER);
 const securityServiceProxy = httpProxy(setLocalSecurity ? SECURITY : SERVER);
 const platformServiceProxy = httpProxy(setLocalPlatform ? PLATFORM : SERVER);
-const documentServiceProxy = httpProxy(setLocalDocument ? DOCUMENT : SERVER);
+const documentServiceProxy = httpProxy(setLocalDocument ? DOCUMENT : CA);
 
-let setPreSite = true;
+let setPreSite = false;
 
 const urlProposal = setLocalProposal ? '/next-proposal-evaluation' : setPreSite ? '/PB-745/next-proposal-evaluation' : '/DEV-3/next-proposal-evaluation';
 const urlDerivation = setLocalDerivation ? '/next-derivation-engine' : setPreSite ? '/PB-745/next-derivation-engine' : '/DEV-3/next-derivation-engine';
@@ -42,6 +42,15 @@ const urlPlatform = setLocalPlatform ? '' : setPreSite ? '/PB-745' : '/DEV-3';
 const urlDocument = setLocalDocument ? '' : setPreSite ? '/PB-745' : '/DEV-3';
 
 // let storage = multer.memoryStorage();
+// var storage = multer.diskStorage({
+//   destination: function (request, file, callback) {
+//       callback(null, './uploads/');
+//   },
+//   filename: function (request, file, callback) {
+//       console.log(file);
+//       callback(null, file.originalname)
+//   }
+// });
 // let upload = multer({ storage: storage });
 // let upload = multer({ dest: 'uploads/' });
 // app.use(express.static('public'));
@@ -56,6 +65,12 @@ const urlDocument = setLocalDocument ? '' : setPreSite ? '/PB-745' : '/DEV-3';
 //   keepExtensions: true// req.files to be arrays of files
 // }));
 // app.use(formidable());
+
+// app.use(bodyParser.urlencoded({
+//   limit: "50mb",
+//   extended: false
+// }));
+// app.use(bodyParser.json({limit: "50mb"}));
 
 let i = 0;
 app.all(['/v1/*','/v2/*'], (req, res, next) => {
@@ -73,14 +88,30 @@ app.get('/api', (req, res, next) => apiServiceProxy(req, res, next));
 
 // PROPOSAL
 app.all('/v1/profile/profiles', (req, res, next) => { req.url = urlProposal + req.url; return proposalServiceProxy(req, res, next); });
+
 // let cpUpload = upload.any();
-// let cpUpload = upload.fields([{ name: 'document', maxCount: 1 }, { name: 'document', maxCount: 1 }]);
-// app.post('/v1/proposal/attachmentDocuments', (req, res, next) => { 
+// let cpUpload = upload.fields([
+//   { name: 'document', maxCount: 2 },
+//   { name: 'cpf' },
+//   { name: 'prospectProposalUid' },
+//   { name: 'docTypeUid'}
+// ]);
+// app.post('/v1/proposal/attachmentDocuments', cpUpload, (req, res, next) => { 
+
+//   app.use(bodyParser.urlencoded({
+//     limit: "50mb",
+//     extended: false
+//   }));
+//   app.use(bodyParser.json({limit: "50mb"}));
+
 //   req.url = urlProposal + req.url; 
+//   // console.log('url '+JSON.stringify(req.url));
 //   console.log('Files '+JSON.stringify(req.files));
 //   console.log('Fields '+JSON.stringify(req.fields));
+//   // console.log(JSON.stringify(req.headers));
 //   return proposalServiceProxy(req, res, next); 
 // });
+
 app.all('/v1/proposal*', (req, res, next) => { req.url = urlProposal + req.url; return proposalServiceProxy(req, res, next); });
 
 // DERIVATION
@@ -100,10 +131,19 @@ app.all('/v1/applications*', (req, res, next) => { req.url = setPreSite ? req.ur
 app.all('/v1/referenceInfo*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
 app.all('/v1/applicants/branches*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
 app.all('/v1/recursoshumanos*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
-app.all('/v1/log*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
+app.all('/v1/log*', (req, res, next) => { 
+  req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); 
+  req.url = urlPlatform + req.url; 
+  return platformServiceProxy(req, res, next); 
+});
 app.all('/v2/log*', (req, res, next) => { req.url = setPreSite ? req.url : req.url.replace('/v1/','/'); req.url = urlPlatform + req.url; return platformServiceProxy(req, res, next); });
 
 // DOCUMENT
-app.all('/v1/docService/documents*', (req, res, next) => { req.url = urlDocument + req.url; return documentServiceProxy(req, res, next); });
+app.all('/v1/docService/documents*', (req, res, next) => { 
+  req.url = urlDocument + req.url; 
+  req.url = setLocalDocument ? req.url : req.url.replace('/DEV-3/','/'); 
+  console.log(req.url);
+  return documentServiceProxy(req, res, next); 
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
