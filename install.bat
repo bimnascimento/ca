@@ -1,2 +1,2 @@
 @echo off
-npm i -s
+npm install -g nodemon
